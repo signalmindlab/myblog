@@ -1,4 +1,4 @@
-# How can I add a custom MDX component?
+# How can I add a custom MDX component? 
 
 Here's an example on how to create a donut chart from Chart.js (assuming you already have the dependencies installed) and use it in MDX posts. First, create a new `DonutChart.tsx` component in `components`:
 
