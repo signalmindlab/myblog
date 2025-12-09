@@ -1,5 +1,6 @@
 const headerNavLinks = [
-  { href: '/', title: 'Home' },
+  // { href: '/', title: 'Home' },
+  { href: 'https://drabdus.info/', title: 'Home' },
   { href: '/blog', title: 'Blog' },
   { href: '/tags', title: 'Tags' },
   // { href: '/projects', title: 'Projects' },
