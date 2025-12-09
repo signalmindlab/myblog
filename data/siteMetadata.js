@@ -3,7 +3,8 @@ const siteMetadata = {
   title: "Md Abdus Samad's Blog",
   author: 'Md Abdus Samad',
   headerTitle: 'My Blog',
-  description: 'A blog created with Next.js and Tailwind.css',
+  // description: 'A blog created with Next.js and Tailwind.css',
+  description: 'This is the official blog site of Dr. Md Abdus Samad',
   language: 'en-us',
   theme: 'system', // system, dark or light
   // siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
