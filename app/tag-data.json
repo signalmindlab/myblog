@@ -1,4 +1,11 @@
 {
+  "korea": 1,
+  "parking": 1,
+  "fines": 1,
+  "whistle": 1,
+  "wizshot": 1,
+  "traffic-laws": 1,
+  "avoidance": 1,
   "ai": 1,
   "research": 1,
   "academic-writing": 1,
