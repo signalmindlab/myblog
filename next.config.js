@@ -54,6 +54,33 @@ const securityHeaders = [
   },
 ]
 
+const nextConfig = {
+  // Keep any existing configuration
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  eslint: {
+    dirs: ['app', 'components', 'layouts', 'scripts'],
+  },
+  
+  // Add these lines for GitHub Pages deployment
+  basePath: '/myblog',
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+
+  // Keep the rest of your existing config
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    })
+    return config
+  },
+}
+
+module.exports = nextConfig
+
+
 const output = process.env.EXPORT ? 'export' : undefined
 const basePath = process.env.BASE_PATH || undefined
 const unoptimized = process.env.UNOPTIMIZED ? true : undefined
