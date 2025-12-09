@@ -60,7 +60,7 @@ const nextConfig = {
   eslint: {
     dirs: ['app', 'components', 'layouts', 'scripts'],
   },
-  
+
   // Add these lines for GitHub Pages deployment
   basePath: '/myblog',
   output: 'export',
@@ -79,7 +79,6 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-
 
 const output = process.env.EXPORT ? 'export' : undefined
 const basePath = process.env.BASE_PATH || undefined
