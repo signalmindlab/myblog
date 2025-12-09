@@ -1,0 +1,991 @@
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ echo. > .nojekyll
+bash: echo.: command not found
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ touch .nojekyll
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ ls -la | grep nojekyll
+-rw-r--r-- 1 DK82SL88 197616      0 Dec  9 19:18 .nojekyll
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn dev
+   ▲ Next.js 15.2.4
+   - Local:        http://localhost:3000
+   - Network:      http://172.20.49.12:3000
+
+ ✓ Starting...
+Warning: Contentlayer might not work as expected on Windows
+Contentlayer config change detected. Updating type definitions and data...
+(node:31588) [DEP0040] DeprecationWarning: The `punycode` module is deprecated.
+Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 4 documents in .contentlayer
+ ✓ Ready in 13.4s
+ ○ Compiling / ...
+ ✓ Compiled / in 9.8s (1299 modules)
+ GET / 200 in 12267ms
+
+
+
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   next.config.js
+        deleted:    package-lock.json
+        modified:   yarn.lock
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .nojekyll
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "Configure for GitHub Pages deployment"
+√ Preparing lint-staged...
+‼ Running tasks for staged files...
+  > package.json — 3 files
+    > *.+(js|jsx|ts|tsx) — 1 file
+      × eslint --fix [FAILED]
+    √ *.+(js|jsx|ts|tsx|json|css|md|mdx) — 1 file
+↓ Skipped because of errors from tasks.
+√ Reverting to original state because of errors...
+√ Cleaning up temporary files...
+
+× eslint --fix:
+
+H:\blog2\next.config.js
+  1:30  error  A `require()` style import is forbidden  @typescript-eslint/no-re
+quire-imports
+  3:28  error  A `require()` style import is forbidden  @typescript-eslint/no-re
+quire-imports
+
+✖ 2 problems (2 errors, 0 warnings)
+
+husky - pre-commit script failed (code 1)
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "Configure for GitHub Pages deployment" --no-verify
+git push -u origin main
+[main 841f13b] Configure for GitHub Pages deployment
+ 4 files changed, 27 insertions(+)
+ create mode 100644 .nojekyll
+ delete mode 100644 package-lock.json
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 129.35 KiB | 8.62 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   ce5e204..841f13b  main -> main
+branch 'main' set up to track 'origin/main'.
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn prettier --write .
+.devcontainer/devcontainer.json 22ms (unchanged)
+.github/FUNDING.yml 16ms (unchanged)
+.github/ISSUE_TEMPLATE/bug_report.md 30ms (unchanged)
+.github/ISSUE_TEMPLATE/feature_request.md 5ms (unchanged)
+.github/workflows/pages.yml 8ms (unchanged)
+.vscode/settings.json 1ms (unchanged)
+.yarn/releases/yarn-3.6.1.cjs 937ms (unchanged)
+.yarnrc.yml 2ms (unchanged)
+app/about/page.tsx 40ms (unchanged)
+app/api/newsletter/route.ts 19ms (unchanged)
+app/blog/[...slug]/page.tsx 49ms (unchanged)
+app/blog/page.tsx 18ms (unchanged)
+app/blog/page/[page]/page.tsx 26ms (unchanged)
+app/layout.tsx 27ms (unchanged)
+app/Main.tsx 22ms (unchanged)
+app/not-found.tsx 13ms (unchanged)
+app/page.tsx 11ms (unchanged)
+app/projects/page.tsx 16ms (unchanged)
+app/robots.ts 9ms (unchanged)
+app/seo.tsx 12ms (unchanged)
+app/sitemap.ts 14ms (unchanged)
+app/tag-data.json 2ms (unchanged)
+app/tags/[tag]/page.tsx 26ms (unchanged)
+app/tags/[tag]/page/[page]/page.tsx 30ms (unchanged)
+app/tags/page.tsx 17ms (unchanged)
+app/theme-providers.tsx 10ms (unchanged)
+components/Card.tsx 14ms (unchanged)
+components/Comments.tsx 11ms (unchanged)
+components/Footer.tsx 15ms (unchanged)
+components/Header.tsx 13ms (unchanged)
+components/Image.tsx 9ms (unchanged)
+components/LayoutWrapper.tsx 11ms (unchanged)
+components/Link.tsx 19ms (unchanged)
+components/MDXComponents.tsx 9ms (unchanged)
+components/MobileNav.tsx 18ms (unchanged)
+components/PageTitle.tsx 10ms (unchanged)
+components/ScrollTopAndComment.tsx 12ms (unchanged)
+components/SearchButton.tsx 11ms (unchanged)
+components/SectionContainer.tsx 9ms (unchanged)
+components/social-icons/icons.tsx 22ms (unchanged)
+components/social-icons/index.tsx 18ms (unchanged)
+components/TableWrapper.tsx 10ms (unchanged)
+components/Tag.tsx 10ms (unchanged)
+components/ThemeSwitch.tsx 20ms
+contentlayer.config.ts 26ms (unchanged)
+css/prism.css 28ms (unchanged)
+css/tailwind.css 22ms
+data/authors/default.mdx 6ms (unchanged)
+data/authors/sparrowhawk.mdx 5ms (unchanged)
+data/blog/introducing-tailwind-nextjs-starter-blog.mdx 37ms (unchanged)
+data/blog/nested-route/introducing-multi-part-posts-with-nested-routing.mdx 8ms (unchanged)
+data/favicon/site.webmanifest 1ms
+data/headerNavLinks.ts 10ms (unchanged)
+data/projectsData.ts 11ms (unchanged)
+data/siteMetadata.js 14ms (unchanged)
+eslint.config.mjs 10ms (unchanged)
+faq/custom-mdx-component.md 22ms
+faq/customize-kbar-search.md 18ms (unchanged)
+faq/deploy-with-docker.md 11ms (unchanged)
+jsconfig.json 1ms (unchanged)
+layouts/AuthorLayout.tsx 15ms
+layouts/ListLayout.tsx 23ms
+layouts/ListLayoutWithTags.tsx 23ms
+layouts/PostBanner.tsx 16ms (unchanged)
+layouts/PostLayout.tsx 32ms (unchanged)
+layouts/PostSimple.tsx 14ms (unchanged)
+next-env.d.ts 5ms (unchanged)
+next.config.js 14ms
+package.json 2ms (unchanged)
+postcss.config.js 5ms (unchanged)
+prettier.config.js 5ms (unchanged)
+public/static/favicons.bak/site.webmanifest 1ms (unchanged)
+public/static/favicons/site.webmanifest 2ms
+README.md 65ms (unchanged)
+scripts/postbuild.mjs 10ms (unchanged)
+scripts/rss.mjs 17ms (unchanged)
+tsconfig.json 2ms (unchanged)
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+git commit -m "Fix prettier formatting" --no-verify
+git push
+[main 4927459] Fix prettier formatting
+ 9 files changed, 14 insertions(+), 10 deletions(-)
+Enumerating objects: 35, done.
+Counting objects: 100% (35/35), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (17/17), done.
+Writing objects: 100% (18/18), 1.55 KiB | 317.00 KiB/s, done.
+Total 18 (delta 13), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (13/13), completed with 13 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   841f13b..4927459  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "blog post added"
+√ Preparing lint-staged...
+√ Running tasks for staged files...
+√ Applying modifications from tasks...
+√ Cleaning up temporary files...
+[main 8b07dcd] blog post added
+ 1 file changed, 163 insertions(+)
+ create mode 100644 data/blog/ai-powered-reference-verification.mdx
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 3.82 KiB | 1.91 MiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   4927459..8b07dcd  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:37080) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 5 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  ... ⚠ TypeScript project references are not fully supported. Attempting to build in incremen
+tal mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (35/35)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                                                   Size  First Load JS
+┌ ○ /                                                                      1.13 kB         105 kB
+├ ○ /_not-found                                                              145 B         101 kB
+├ ○ /about                                                                   495 B         106 kB
+├ ƒ /api/newsletter                                                          145 B         101 kB
+├ ○ /blog                                                                    137 B         110 kB
+├ ● /blog/[...slug]                                                        4.15 kB         113 kB
+├   ├ /blog/ai-powered-reference-verification
+├   ├ /blog/introducing-tailwind-nextjs-starter-blog
+├   └ /blog/nested-route/introducing-multi-part-posts-with-nested-routing
+├ ● /blog/page/[page]                                                        137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                                                184 B         109 kB
+├ ○ /robots.txt                                                              145 B         101 kB
+├ ○ /sitemap.xml                                                             145 B         101 kB
+├ ○ /tags                                                                    172 B         104 kB
+├ ● /tags/[tag]                                                              136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+7 more paths]
+└ ● /tags/[tag]/page/[page]                                                  137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+7 more paths]
++ First Load JS shared by all                                               101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js                                    53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js                                         45.4 kB
+  └ other shared chunks (total)                                            2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m ".JS modified"
+√ Preparing lint-staged...
+‼ Running tasks for staged files...
+  > package.json — 3 files
+    > *.+(js|jsx|ts|tsx) — 1 file
+      × eslint --fix [FAILED]
+    √ *.+(js|jsx|ts|tsx|json|css|md|mdx) — 2 files
+↓ Skipped because of errors from tasks.
+√ Reverting to original state because of errors...
+√ Cleaning up temporary files...
+
+× eslint --fix:
+
+H:\blog2\next.config.js
+  1:30  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  3:28  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+✖ 2 problems (2 errors, 0 warnings)
+
+husky - pre-commit script failed (code 1)
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m ".js edited, added" --no-verify
+[main 0571758] .js edited, added
+ 3 files changed, 134 insertions(+), 27 deletions(-)
+ create mode 100644 next.config.js.bak
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 614 bytes | 307.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   8b07dcd..0571758  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:43492) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 3 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  ... ⚠ TypeScript project references are not fully supported. Attempting to build in incremen
+tal mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (23/23)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                       Size  First Load JS
+┌ ○ /                                          1.13 kB         105 kB
+├ ○ /_not-found                                  145 B         101 kB
+├ ○ /about                                       495 B         106 kB
+├ ƒ /api/newsletter                              145 B         101 kB
+├ ○ /blog                                        137 B         110 kB
+├ ● /blog/[...slug]                            4.14 kB         113 kB
+├   └ /blog/ai-powered-reference-verification
+├ ● /blog/page/[page]                            137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                    184 B         109 kB
+├ ○ /robots.txt                                  145 B         101 kB
+├ ○ /sitemap.xml                                 145 B         101 kB
+├ ○ /tags                                        172 B         104 kB
+├ ● /tags/[tag]                                  136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+2 more paths]
+└ ● /tags/[tag]/page/[page]                      137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+2 more paths]
++ First Load JS shared by all                   101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js        53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js             45.4 kB
+  └ other shared chunks (total)                2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "old post removed" --no-verify
+[main d1c91a8] old post removed
+ 4 files changed, 3 insertions(+), 7 deletions(-)
+ rename data/blog/{introducing-tailwind-nextjs-starter-blog.mdx => introducing-tailwind-nextjs-starter-blog.mdx.bak} (100%)
+ rename data/blog/nested-route/{introducing-multi-part-posts-with-nested-routing.mdx => introducing-multi-part-posts-with-nested-routin
+g.mdx.bak} (100%)
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (8/8), 740 bytes | 370.00 KiB/s, done.
+Total 8 (delta 6), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (6/6), completed with 6 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   0571758..d1c91a8  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:45936) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 3 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  ... ⚠ TypeScript project references are not fully supported. Attempting to build in incremen
+tal mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (23/23)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                       Size  First Load JS
+┌ ○ /                                          1.13 kB         105 kB
+├ ○ /_not-found                                  145 B         101 kB
+├ ○ /about                                       495 B         106 kB
+├ ƒ /api/newsletter                              145 B         101 kB
+├ ○ /blog                                        137 B         110 kB
+├ ● /blog/[...slug]                            4.14 kB         113 kB
+├   └ /blog/ai-powered-reference-verification
+├ ● /blog/page/[page]                            137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                    184 B         109 kB
+├ ○ /robots.txt                                  145 B         101 kB
+├ ○ /sitemap.xml                                 145 B         101 kB
+├ ○ /tags                                        172 B         104 kB
+├ ● /tags/[tag]                                  136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+2 more paths]
+└ ● /tags/[tag]/page/[page]                      137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+2 more paths]
++ First Load JS shared by all                   101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js        53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js             45.4 kB
+  └ other shared chunks (total)                2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "fevicon added in public" --no-verify
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Everything up-to-date
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:44464) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 3 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  . ⚠ TypeScript project references are not fully supported. Attempting to build in incrementa
+l mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (23/23)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                       Size  First Load JS
+┌ ○ /                                          1.13 kB         105 kB
+├ ○ /_not-found                                  145 B         101 kB
+├ ○ /about                                       495 B         106 kB
+├ ƒ /api/newsletter                              145 B         101 kB
+├ ○ /blog                                        137 B         110 kB
+├ ● /blog/[...slug]                            4.14 kB         113 kB
+├   └ /blog/ai-powered-reference-verification
+├ ● /blog/page/[page]                            137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                    184 B         109 kB
+├ ○ /robots.txt                                  145 B         101 kB
+├ ○ /sitemap.xml                                 145 B         101 kB
+├ ○ /tags                                        172 B         104 kB
+├ ● /tags/[tag]                                  136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+2 more paths]
+└ ● /tags/[tag]/page/[page]                      137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+2 more paths]
++ First Load JS shared by all                   101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js        53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js             45.4 kB
+  └ other shared chunks (total)                2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "fevicon added to public" --no-verify
+[main 1f29c2f] fevicon added to public
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 public/favicon.ico
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 2.35 KiB | 803.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   d1c91a8..1f29c2f  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:47776) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 3 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  ... ⚠ TypeScript project references are not fully supported. Attempting to build in incremen
+tal mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (23/23)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                       Size  First Load JS
+┌ ○ /                                          1.13 kB         105 kB
+├ ○ /_not-found                                  145 B         101 kB
+├ ○ /about                                       495 B         106 kB
+├ ƒ /api/newsletter                              145 B         101 kB
+├ ○ /blog                                        137 B         110 kB
+├ ● /blog/[...slug]                            4.14 kB         113 kB
+├   └ /blog/ai-powered-reference-verification
+├ ● /blog/page/[page]                            137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                    184 B         109 kB
+├ ○ /robots.txt                                  145 B         101 kB
+├ ○ /sitemap.xml                                 145 B         101 kB
+├ ○ /tags                                        172 B         104 kB
+├ ● /tags/[tag]                                  136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+2 more paths]
+└ ● /tags/[tag]/page/[page]                      137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+2 more paths]
++ First Load JS shared by all                   101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js        53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js             45.4 kB
+  └ other shared chunks (total)                2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "layout.tex revised and added" --no-verify
+[main 82abd67] layout.tex revised and added
+ 2 files changed, 112 insertions(+)
+ create mode 100644 app/layout.tsx.bak
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 446 bytes | 223.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   1f29c2f..82abd67  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:48188) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 3 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  . ⚠ TypeScript project references are not fully supported. Attempting to build in incrementa
+l mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (23/23)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                       Size  First Load JS
+┌ ○ /                                          1.13 kB         105 kB
+├ ○ /_not-found                                  145 B         101 kB
+├ ○ /about                                       495 B         106 kB
+├ ƒ /api/newsletter                              145 B         101 kB
+├ ○ /blog                                        137 B         110 kB
+├ ● /blog/[...slug]                            4.14 kB         113 kB
+├   └ /blog/ai-powered-reference-verification
+├ ● /blog/page/[page]                            137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                    184 B         109 kB
+├ ○ /robots.txt                                  145 B         101 kB
+├ ○ /sitemap.xml                                 145 B         101 kB
+├ ○ /tags                                        172 B         104 kB
+├ ● /tags/[tag]                                  136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+2 more paths]
+└ ● /tags/[tag]/page/[page]                      137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+2 more paths]
++ First Load JS shared by all                   101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js        53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js             45.4 kB
+  └ other shared chunks (total)                2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "Return to home added" --no-verify
+[main cde39bf] Return to home added
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+ create mode 100644 blog-project-documentation.pdf
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 7.02 KiB | 2.34 MiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   82abd67..cde39bf  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:940) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 3 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  . ⚠ TypeScript project references are not fully supported. Attempting to build in incrementa
+l mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (23/23)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                       Size  First Load JS
+┌ ○ /                                          1.13 kB         105 kB
+├ ○ /_not-found                                  145 B         101 kB
+├ ○ /about                                       495 B         106 kB
+├ ƒ /api/newsletter                              145 B         101 kB
+├ ○ /blog                                        137 B         110 kB
+├ ● /blog/[...slug]                            4.16 kB         113 kB
+├   └ /blog/ai-powered-reference-verification
+├ ● /blog/page/[page]                            137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                    184 B         109 kB
+├ ○ /robots.txt                                  145 B         101 kB
+├ ○ /sitemap.xml                                 145 B         101 kB
+├ ○ /tags                                        172 B         104 kB
+├ ● /tags/[tag]                                  136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+2 more paths]
+└ ● /tags/[tag]/page/[page]                      137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+2 more paths]
++ First Load JS shared by all                   101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js        53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js             45.4 kB
+  └ other shared chunks (total)                2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:47968) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 3 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  ... ⚠ TypeScript project references are not fully supported. Attempting to build in incremen
+tal mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (23/23)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                       Size  First Load JS
+┌ ○ /                                          1.13 kB         105 kB
+├ ○ /_not-found                                  145 B         101 kB
+├ ○ /about                                       495 B         106 kB
+├ ƒ /api/newsletter                              145 B         101 kB
+├ ○ /blog                                        137 B         110 kB
+├ ● /blog/[...slug]                            4.16 kB         113 kB
+├   └ /blog/ai-powered-reference-verification
+├ ● /blog/page/[page]                            137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                    184 B         109 kB
+├ ○ /robots.txt                                  145 B         101 kB
+├ ○ /sitemap.xml                                 145 B         101 kB
+├ ○ /tags                                        172 B         104 kB
+├ ● /tags/[tag]                                  136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+2 more paths]
+└ ● /tags/[tag]/page/[page]                      137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+2 more paths]
++ First Load JS shared by all                   101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js        53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js             45.4 kB
+  └ other shared chunks (total)                2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "post follow in github removed" --no-verify
+[main fa61eb7] post follow in github removed
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 548 bytes | 274.00 KiB/s, done.
+Total 6 (delta 5), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (5/5), completed with 5 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   cde39bf..fa61eb7  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:21084) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 3 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  ... ⚠ TypeScript project references are not fully supported. Attempting to build in incremen
+tal mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+ ✓ Generating static pages (23/23)
+ ✓ Collecting build traces
+ ✓ Finalizing page optimization
+
+Route (app)                                       Size  First Load JS
+┌ ○ /                                          1.13 kB         105 kB
+├ ○ /_not-found                                  145 B         101 kB
+├ ○ /about                                       495 B         106 kB
+├ ƒ /api/newsletter                              145 B         101 kB
+├ ○ /blog                                        137 B         110 kB
+├ ● /blog/[...slug]                            4.16 kB         113 kB
+├   └ /blog/ai-powered-reference-verification
+├ ● /blog/page/[page]                            137 B         110 kB
+├   └ /blog/page/1
+├ ○ /projects                                    184 B         109 kB
+├ ○ /robots.txt                                  145 B         101 kB
+├ ○ /sitemap.xml                                 145 B         101 kB
+├ ○ /tags                                        172 B         104 kB
+├ ● /tags/[tag]                                  136 B         110 kB
+├   ├ /tags/ai
+├   ├ /tags/research
+├   ├ /tags/academic-writing
+├   └ [+2 more paths]
+└ ● /tags/[tag]/page/[page]                      137 B         110 kB
+    ├ /tags/ai/page/1
+    ├ /tags/research/page/1
+    ├ /tags/academic-writing/page/1
+    └ [+2 more paths]
++ First Load JS shared by all                   101 kB
+  ├ chunks/4bd1b696-5100ffb4d6775e5e.js        53.2 kB
+  ├ chunks/684-c6a4ac930a941d3c.js             45.4 kB
+  └ other shared chunks (total)                2.02 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+RSS feed generated...
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+warning: in the working copy of 'data/blog/2025-12-07-korea-parking-fine-alert-advantages.mdx', CRLF will be replaced by LF the next ti
+me Git touches it
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "bottom line remove try" --no-verify
+[main eb8b850] bottom line remove try
+ 2 files changed, 122 insertions(+), 1 deletion(-)
+ create mode 100644 data/blog/2025-12-07-korea-parking-fine-alert-advantages.mdx
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 2.30 KiB | 784.00 KiB/s, done.
+Total 6 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   fa61eb7..eb8b850  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ yarn build
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+Warning: Contentlayer might not work as expected on Windows
+(node:48264) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+successCallback H:/blog2/.contentlayer
+Local search index generated...
+Generated 4 documents in .contentlayer
+ ✓ Compiled successfully
+   Linting and checking validity of types  . ⚠ TypeScript project references are not fully supported. Attempting to build in incrementa
+l mode.
+ ✓ Linting and checking validity of types
+ ✓ Collecting page data
+Error occurred prerendering page "/blog/2025-12-07-korea-parking-fine-alert-advantages". Read more: https://nextjs.org/docs/messages/pr
+erender-error
+Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: und
+efined.
+    at nF (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:64389)
+    at nq (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:67434)
+    at nH (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:65009)
+    at nV (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:70865)
+    at nz (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:69548)
+    at nq (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:67701)
+    at nH (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:65009)
+    at nq (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:67673)
+    at n2 (H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:75347)
+    at H:\blog2\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:76:44217
+Export encountered an error on /blog/[...slug]/page: /blog/2025-12-07-korea-parking-fine-alert-advantages, exiting the build.
+ ⨯ Next.js build worker exited with code: 1 and signal: null
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git add .
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git commit -m "bottom line remove try" --no-verify
+[main 4425e34] bottom line remove try
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$ git push
+Enumerating objects: 13, done.
+Counting objects: 100% (13/13), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (7/7), 629 bytes | 209.00 KiB/s, done.
+Total 7 (delta 5), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (5/5), completed with 5 local objects.
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/signalmindlab/myblog.git
+To https://github.com/signalmindlab/blog2.git
+   eb8b850..4425e34  main -> main
+
+DK82SL88@MWPPC MINGW64 /h/blog2 (main)
+$
