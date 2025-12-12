@@ -37,9 +37,9 @@ One of LaTeX Workshop's best features is bidirectional navigation between source
 
 ### PDF → Source (Reverse SyncTeX)
 
-- **Right-click in PDF** → Select "Go to Source"  
-- **`Ctrl+Click`** (or `Cmd+Click`) anywhere in the PDF  
-  
+- **Right-click in PDF** → Select "Go to Source"
+- **`Ctrl+Click`** (or `Cmd+Click`) anywhere in the PDF
+
 Both methods jump back to the corresponding line in your `.tex` file.
 
 ### Source → PDF (Forward SyncTeX)
@@ -91,6 +91,7 @@ Both methods jump back to the corresponding line in your `.tex` file.
 ### Enable Auto-Build on Save
 
 Add this to your VS Code `settings.json`:
+
 ```json
 {
   "latex-workshop.latex.autoBuild.run": "onSave"
@@ -108,6 +109,7 @@ Now every time you hit `Ctrl+S`, your PDF automatically rebuilds. No more manual
 ### Useful Commands to Bind
 
 Consider creating custom shortcuts for:
+
 - `latex-workshop.clean` - Clean auxiliary files
 - `latex-workshop.citation` - Insert citation
 - `latex-workshop.addtexroot` - Set main TeX file in multi-file projects
@@ -126,10 +128,12 @@ This keeps both hands on the keyboard and maintains focus on writing.
 ## Troubleshooting
 
 **PDF won't update?**
+
 - Try `Ctrl+Alt+X` then `Ctrl+Alt+V` to kill and restart
 - Check the Output panel (`Ctrl+Shift+U`) for build errors
 
 **SyncTeX not working?**
+
 - Ensure `\synctex=1` is in your build recipe
 - LaTeX Workshop usually handles this automatically
 
@@ -139,4 +143,4 @@ These shortcuts transform VS Code into a powerful LaTeX IDE. The initial learnin
 
 ---
 
-*Last updated: December 12, 2024*
+_Last updated: December 12, 2024_
