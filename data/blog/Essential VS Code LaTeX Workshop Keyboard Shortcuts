@@ -1,8 +1,9 @@
 ---
 title: "Essential VS Code LaTeX Workshop Keyboard Shortcuts for Faster PDF Workflow"
-date: 2024-12-12
-categories: [LaTeX, Productivity, Tutorial]
-description: "Master VS Code LaTeX Workshop with these essential keyboard shortcuts to streamline your academic writing and PDF compilation workflow"
+date: '2024-12-12'
+tags: ['LaTeX', 'Productivity', 'Tutorial', 'VS Code']
+draft: false
+summary: "Master VS Code LaTeX Workshop with these essential keyboard shortcuts to streamline your academic writing and PDF compilation workflow"
 ---
 
 If you're writing LaTeX documents in VS Code with the LaTeX Workshop extension, mastering keyboard shortcuts can dramatically speed up your workflow. Here's a comprehensive guide to the most useful shortcuts for building, viewing, and navigating your LaTeX PDFs.
