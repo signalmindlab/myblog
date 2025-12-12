@@ -1,5 +1,5 @@
 {
-  "korea": 1,
+  "korea": 2,
   "parking": 1,
   "fines": 1,
   "whistle": 1,
@@ -10,5 +10,10 @@
   "research": 1,
   "academic-writing": 1,
   "llm": 1,
-  "automation": 1
+  "automation": 1,
+  "shopping": 1,
+  "price-comparison": 1,
+  "guide": 1,
+  "danawa": 1,
+  "naver": 1
 }
