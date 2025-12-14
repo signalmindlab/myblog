@@ -100,10 +100,10 @@ export default function ListLayoutWithTags({
                   All Posts
                 </Link>
               )}
-              <ul>
+              <ul className="mt-3 flex flex-wrap gap-x-2 gap-y-3">
                 {sortedTags.map((t) => {
                   return (
-                    <li key={t} className="my-3">
+                    <li key={t} className="flex-shrink-0">
                       {decodeURI(pathname.split('/tags/')[1]) === slug(t) ? (
                         <h3 className="text-primary-500 inline px-3 py-2 text-sm font-bold uppercase">
                           {`${t} (${tagCounts[t]})`}
