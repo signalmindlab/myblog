@@ -16,8 +16,12 @@
   "guide": 1,
   "danawa": 1,
   "naver": 1,
-  "latex": 1,
+  "latex": 2,
   "productivity": 1,
-  "tutorial": 1,
-  "vs-code": 1
+  "tutorial": 2,
+  "vs-code": 1,
+  "vscode": 1,
+  "git": 1,
+  "version-control": 1,
+  "research-tools": 1
 }
