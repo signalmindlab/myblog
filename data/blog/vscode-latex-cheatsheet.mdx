@@ -1,0 +1,703 @@
+---
+title: 'VS Code LaTeX Workshop Cheatsheet: Essential Shortcuts for Academic Writing'
+date: '2025-12-17'
+tags: ['latex', 'vscode', 'academic-writing', 'productivity', 'tutorial']
+draft: false
+summary: 'Master Visual Studio Code for LaTeX editing with this comprehensive cheatsheet. Learn essential keyboard shortcuts, navigation techniques, and workflow tips to write academic papers faster and more efficiently.'
+authors: ['default']
+---
+
+## Why VS Code for LaTeX?
+
+Visual Studio Code with the LaTeX Workshop extension has become the go-to editor for many academic writers. It combines powerful editing features, seamless PDF preview, intelligent autocomplete, and Git integration—all in one lightweight package. But to truly unlock its potential, you need to master the keyboard shortcuts.
+
+This comprehensive cheatsheet covers everything from basic compilation to advanced multi-cursor editing, helping you write academic papers faster and with fewer errors.
+
+**Note for Mac users:** Replace `Ctrl` with `Cmd (⌘)` and `Alt` with `Option (⌥)` throughout this guide.
+
+---
+
+## Building & Compiling
+
+These are your most frequently used commands for compiling LaTeX documents and viewing output.
+
+| Shortcut                | Action                                    |
+| ----------------------- | ----------------------------------------- |
+| `Ctrl + Alt + B`        | Build LaTeX project                       |
+| `Ctrl + Alt + R`        | Build with default recipe                 |
+| `Ctrl + Alt + V`        | View PDF output                           |
+| `Ctrl + Alt + J`        | SyncTeX forward: Jump from source to PDF  |
+| `Ctrl + Click` (in PDF) | SyncTeX backward: Jump from PDF to source |
+| `Ctrl + Alt + C`        | Clean auxiliary files (.aux, .log, etc.)  |
+| `Ctrl + L, Ctrl + W`    | Show LaTeX Workshop panel                 |
+
+### Troubleshooting Build Issues
+
+If `Ctrl + Alt + B` doesn't work:
+
+1. Open Command Palette with `Ctrl + Shift + P`
+2. Type "LaTeX Workshop: Build LaTeX project"
+3. Press Enter
+
+For bibliography issues, run the complete build sequence manually in the terminal:
+
+```bash
+pdflatex manuscript.tex
+bibtex manuscript
+pdflatex manuscript.tex
+pdflatex manuscript.tex
+```
+
+---
+
+## Document Navigation
+
+Efficiently navigate through large LaTeX documents with hundreds of pages.
+
+| Shortcut           | Action                                     |
+| ------------------ | ------------------------------------------ |
+| `Ctrl + Home`      | Jump to beginning of file                  |
+| `Ctrl + End`       | Jump to end of file                        |
+| `Ctrl + G`         | Go to specific line number                 |
+| `Ctrl + Shift + O` | Go to symbol (sections/subsections/labels) |
+| `Ctrl + T`         | Show all symbols in workspace              |
+| `Ctrl + Shift + .` | Focus breadcrumb navigation                |
+| `Alt + ←`          | Navigate back to previous location         |
+| `Alt + →`          | Navigate forward to next location          |
+| `Ctrl + U`         | Undo cursor movement                       |
+
+### Pro Navigation Workflow
+
+The most powerful navigation feature is `Ctrl + Shift + O`. This opens a searchable list of all sections, subsections, and labels in your document.
+
+**Example workflow:**
+
+1. Press `Ctrl + Shift + O`
+2. Type "methodology" to filter sections
+3. Press Enter to jump directly to that section
+4. Use `Alt + ←` to return to where you were
+
+This is far faster than scrolling through a 100-page thesis!
+
+---
+
+## Working with References & Citations
+
+Jump between citations, labels, and their definitions seamlessly.
+
+| Shortcut       | Action                                        |
+| -------------- | --------------------------------------------- |
+| `Ctrl + Click` | Jump to label/citation definition             |
+| `F12`          | Go to definition                              |
+| `Alt + F12`    | Peek definition (view inline without leaving) |
+| `Shift + F12`  | Find all references to current symbol         |
+| `F2`           | Rename symbol (renames all instances)         |
+
+### Citation Management Tips
+
+**View citation without jumping:** Hold `Ctrl` and hover over any `\ref{}` or `\cite{}` to see a preview.
+
+**Find orphaned labels:** Use `Shift + F12` on a label to see where it's referenced. If the list is empty, that label isn't used anywhere.
+
+**Rename labels safely:** Put your cursor on a label name and press `F2`. This renames it everywhere in your project, preventing broken references.
+
+---
+
+## Code Folding
+
+Collapse and expand sections to focus on specific parts of your document.
+
+| Shortcut             | Action                                   |
+| -------------------- | ---------------------------------------- |
+| `Ctrl + Shift + [`   | Fold (collapse) current section          |
+| `Ctrl + Shift + ]`   | Unfold (expand) current section          |
+| `Ctrl + K, Ctrl + 0` | Fold all sections                        |
+| `Ctrl + K, Ctrl + J` | Unfold all sections                      |
+| `Ctrl + K, Ctrl + 1` | Fold to level 1 (show sections only)     |
+| `Ctrl + K, Ctrl + 2` | Fold to level 2 (sections + subsections) |
+
+### Document Structure at a Glance
+
+Press `Ctrl + K, Ctrl + 1` to fold everything to the top level. This gives you a bird's-eye view of your document structure:
+
+```latex
+\section{Introduction}
+...
+
+\section{Literature Review}
+...
+
+\section{Methodology}
+...
+
+\section{Results}
+...
+
+\section{Discussion}
+...
+```
+
+Click on any section to expand just that part. This is invaluable for reorganizing large documents.
+
+---
+
+## Search & Replace
+
+Find and replace text, including support for regular expressions.
+
+| Shortcut           | Action                       |
+| ------------------ | ---------------------------- |
+| `Ctrl + F`         | Find in current file         |
+| `Ctrl + H`         | Find and replace             |
+| `F3`               | Find next occurrence         |
+| `Shift + F3`       | Find previous occurrence     |
+| `Alt + Enter`      | Select all occurrences       |
+| `Ctrl + Shift + F` | Find in all project files    |
+| `Ctrl + Shift + H` | Replace in all project files |
+| `Alt + R`          | Toggle regex mode            |
+| `Alt + C`          | Toggle case sensitivity      |
+| `Alt + W`          | Toggle whole word matching   |
+
+### Regex Examples for LaTeX
+
+**Convert all sections to unnumbered sections:**
+
+Find: `\\section\{([^}]+)\}`  
+Replace: `\\section*{$1}`  
+Enable regex mode with `Alt + R`
+
+**Find all citations:**
+
+Find: `\\cite\{[^}]+\}`  
+Enable regex mode
+
+**Remove all comments:**
+
+Find: `%.*$`  
+Replace: (leave empty)  
+Enable regex mode
+
+---
+
+## Editing & Selection
+
+Speed up editing with these essential shortcuts.
+
+| Shortcut              | Action                                 |
+| --------------------- | -------------------------------------- |
+| `Ctrl + D`            | Select next occurrence of current word |
+| `Ctrl + Shift + L`    | Select all occurrences of current word |
+| `Ctrl + L`            | Select entire current line             |
+| `Ctrl + Shift + K`    | Delete entire line                     |
+| `Alt + ↑ / ↓`         | Move line up/down                      |
+| `Shift + Alt + ↑ / ↓` | Duplicate line up/down                 |
+| `Ctrl + /`            | Toggle line comment (%)                |
+| `Ctrl + Shift + A`    | Toggle block comment                   |
+| `Ctrl + ]`            | Indent line                            |
+| `Ctrl + [`            | Outdent line                           |
+
+### Quick Editing Workflow
+
+**Scenario:** You need to change "analyze" to "analyse" throughout your document for British English.
+
+1. Place cursor on "analyze"
+2. Press `Ctrl + Shift + L` (selects all instances)
+3. Type "analyse" once
+4. All instances change simultaneously
+
+This works for any repeated term, saving countless find-and-replace operations.
+
+---
+
+## Multi-Cursor Editing
+
+Edit multiple locations simultaneously—one of VS Code's most powerful features.
+
+| Shortcut         | Action                         |
+| ---------------- | ------------------------------ |
+| `Alt + Click`    | Add cursor at clicked position |
+| `Ctrl + Alt + ↑` | Add cursor on line above       |
+| `Ctrl + Alt + ↓` | Add cursor on line below       |
+| `Ctrl + U`       | Undo last cursor operation     |
+| `Esc`            | Exit multi-cursor mode         |
+
+### Real-World Example: Batch Citations
+
+You need to add the same citation to multiple locations:
+
+1. `Alt + Click` at each location
+2. Type `~\cite{smith2023}` once
+3. All citations appear simultaneously
+
+Or converting a list to LaTeX items:
+
+```
+Original:
+Machine learning
+Deep learning
+Neural networks
+
+Process:
+1. Alt + Click at the start of each line
+2. Type \item followed by space
+3. Result:
+\item Machine learning
+\item Deep learning
+\item Neural networks
+```
+
+---
+
+## File & Project Management
+
+Navigate between files and manage split views.
+
+| Shortcut                | Action                          |
+| ----------------------- | ------------------------------- |
+| `Ctrl + P`              | Quick file open (type filename) |
+| `Ctrl + Tab`            | Switch between recent files     |
+| `Ctrl + Shift + E`      | Focus on Explorer (file tree)   |
+| `Ctrl + \`              | Split editor vertically         |
+| `Ctrl + 1` / `Ctrl + 2` | Focus on editor group 1 or 2    |
+| `Ctrl + W`              | Close current file              |
+| `Ctrl + K, W`           | Close all files                 |
+
+### Split View for References
+
+Working with a `.tex` file and `.bib` file simultaneously:
+
+1. Open your main `.tex` file
+2. Press `Ctrl + \` to split the editor
+3. Press `Ctrl + P`, type your `.bib` filename
+4. Now you can see both files side by side
+5. Use `Ctrl + 1` and `Ctrl + 2` to switch focus
+
+This is perfect for adding citations while viewing your bibliography.
+
+---
+
+## LaTeX Autocomplete & Snippets
+
+Speed up LaTeX command entry with intelligent autocomplete.
+
+| Shortcut             | Action                                       |
+| -------------------- | -------------------------------------------- |
+| `Ctrl + Space`       | Trigger autocomplete/IntelliSense            |
+| `Tab`                | Accept suggestion / Next snippet placeholder |
+| `Shift + Tab`        | Previous snippet placeholder                 |
+| `Ctrl + L, Ctrl + S` | Show LaTeX snippets                          |
+
+### Autocomplete Triggers
+
+LaTeX Workshop provides smart autocomplete:
+
+- **Type `\begin`** → Shows all available environments (figure, table, equation, etc.)
+- **Type `\ref`** → Lists all your labels for easy selection
+- **Type `\cite`** → Shows all BibTeX entries from your `.bib` file
+- **Type `BXY`** → Math symbols (e.g., `BAL` → `\alpha`, `BBE` → `\beta`)
+
+### Custom Snippets
+
+**Figure with caption:**
+
+```latex
+Type: fig + Tab
+
+Expands to:
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{filename}
+    \caption{Caption text}
+    \label{fig:label}
+\end{figure}
+```
+
+**Equation:**
+
+```latex
+Type: eq + Tab
+
+Expands to:
+\begin{equation}
+    equation here
+    \label{eq:label}
+\end{equation}
+```
+
+---
+
+## Terminal Operations
+
+Access the integrated terminal for manual compilation or Git operations.
+
+| Shortcut             | Action                     |
+| -------------------- | -------------------------- |
+| `Ctrl + `` `         | Toggle integrated terminal |
+| `Ctrl + Shift + `` ` | Create new terminal        |
+| `Ctrl + C`           | Stop running process       |
+
+### Manual Build Commands
+
+Sometimes you need manual control over the build process:
+
+```bash
+# Standard LaTeX build
+pdflatex manuscript.tex
+
+# With bibliography
+pdflatex manuscript.tex
+bibtex manuscript
+pdflatex manuscript.tex
+pdflatex manuscript.tex
+
+# With biblatex/biber
+pdflatex manuscript.tex
+biber manuscript
+pdflatex manuscript.tex
+pdflatex manuscript.tex
+
+# Using latexmk (automatic)
+latexmk -pdf -synctex=1 manuscript.tex
+
+# Clean auxiliary files
+latexmk -c
+```
+
+---
+
+## Panels & Views
+
+Manage VS Code's interface for optimal screen real estate.
+
+| Shortcut           | Action                    |
+| ------------------ | ------------------------- |
+| `Ctrl + B`         | Toggle sidebar visibility |
+| `Ctrl + J`         | Toggle bottom panel       |
+| `Ctrl + Shift + E` | Show Explorer (file tree) |
+| `Ctrl + Shift + F` | Show Search panel         |
+| `Ctrl + Shift + G` | Show Source Control (Git) |
+| `Ctrl + Shift + X` | Show Extensions           |
+
+### Distraction-Free Writing
+
+For focused writing sessions:
+
+1. Press `Ctrl + K, Z` to enter Zen mode (full screen, no panels)
+2. Or press `Ctrl + B` and `Ctrl + J` to hide sidebars
+3. Press `F11` for full screen
+4. Press `Esc` to exit Zen mode
+
+---
+
+## Command Palette & Settings
+
+Access any command or configure VS Code settings.
+
+| Shortcut             | Action                  |
+| -------------------- | ----------------------- |
+| `Ctrl + Shift + P`   | Open Command Palette    |
+| `Ctrl + ,`           | Open Settings           |
+| `Ctrl + K, Ctrl + S` | Open Keyboard Shortcuts |
+
+### Essential Settings for LaTeX
+
+Add these to your `settings.json` for optimal LaTeX experience:
+
+1. Press `Ctrl + Shift + P`
+2. Type "Preferences: Open User Settings (JSON)"
+3. Add these configurations:
+
+```json
+{
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.snm",
+    "*.synctex.gz",
+    "*.nav"
+  ],
+  "latex-workshop.latex.recipe.default": "latexmk"
+}
+```
+
+This enables:
+
+- **Auto-build on save** – no need to manually trigger builds
+- **In-tab PDF viewer** – PDF opens alongside your code
+- **SyncTeX** – click between PDF and source
+- **Automatic cleanup** – removes auxiliary files after build
+- **Latexmk** – intelligent build system that runs the right number of passes
+
+---
+
+## Common Workflows
+
+### Workflow 1: Quick Section Navigation
+
+**Goal:** Jump to a specific section in a 200-page thesis
+
+```
+1. Press Ctrl + Shift + O
+2. Type section name (e.g., "results")
+3. Press Enter
+4. Edit content
+5. Press Alt + ← to return to previous location
+```
+
+### Workflow 2: Build and Preview
+
+**Goal:** Compile and view your document
+
+```
+1. Press Ctrl + Alt + B (build)
+2. Wait for compilation (watch status bar)
+3. Press Ctrl + Alt + V (view PDF)
+4. Ctrl + Click in PDF to jump back to source
+```
+
+### Workflow 3: Find and Replace with Regex
+
+**Goal:** Convert all `\section{}` to `\section*{}`
+
+```
+1. Press Ctrl + H
+2. Click regex button (or press Alt + R)
+3. Find: \\section\{([^}]+)\}
+4. Replace: \\section*{$1}
+5. Review matches
+6. Click Replace All
+```
+
+### Workflow 4: Multi-File Reference Management
+
+**Goal:** Work with main document and bibliography simultaneously
+
+```
+1. Open main.tex
+2. Press Ctrl + \ (split editor)
+3. Press Ctrl + P
+4. Type "references.bib"
+5. Press Enter
+6. Use Ctrl + 1/2 to switch between panes
+7. Add citations in main.tex while viewing references.bib
+```
+
+### Workflow 5: Document Structure Review
+
+**Goal:** Review and reorganize your document
+
+```
+1. Press Ctrl + K, Ctrl + 1 (fold to level 1)
+2. Review section order
+3. Select section heading
+4. Press Alt + ↑/↓ to reorder sections
+5. Press Ctrl + K, Ctrl + J to unfold all
+```
+
+---
+
+## Advanced Tips & Tricks
+
+### Tip 1: Custom Keybindings
+
+Create your own shortcuts for frequently used commands:
+
+1. Press `Ctrl + K, Ctrl + S`
+2. Search for "LaTeX Workshop"
+3. Click the pencil icon next to any command
+4. Press your desired key combination
+
+### Tip 2: Workspace Settings
+
+For project-specific settings (e.g., specific journal formatting), create `.vscode/settings.json` in your project folder:
+
+```json
+{
+  "latex-workshop.latex.outDir": "./build",
+  "latex-workshop.view.pdf.zoom": "page-width"
+}
+```
+
+### Tip 3: Git Integration
+
+VS Code has excellent Git support built-in:
+
+- `Ctrl + Shift + G` opens Source Control panel
+- See changes inline in your editor
+- Commit with `Ctrl + Enter` in commit message box
+- Click on changed files to see diffs
+
+### Tip 4: Spell Checking
+
+Install "Code Spell Checker" extension:
+
+1. Press `Ctrl + Shift + X`
+2. Search "Code Spell Checker"
+3. Install
+4. Add LaTeX-specific dictionary in settings
+
+### Tip 5: Bibliography Management
+
+Use LaTeX Workshop's citation browser:
+
+1. Press `Ctrl + L, Ctrl + S`
+2. Select "Citation Browser"
+3. Search and insert citations directly
+
+---
+
+## Troubleshooting Common Issues
+
+### Issue: Build shortcut not working
+
+**Symptom:** `Ctrl + Alt + B` does nothing
+
+**Solutions:**
+
+- Check if LaTeX Workshop extension is installed
+- Try Command Palette: `Ctrl + Shift + P` → "LaTeX Workshop: Build"
+- Check for keybinding conflicts in `Ctrl + K, Ctrl + S`
+- Restart VS Code
+
+### Issue: PDF not opening after build
+
+**Symptom:** Build succeeds but PDF doesn't appear
+
+**Solutions:**
+
+- Check `latex-workshop.view.pdf.viewer` setting (should be "tab")
+- Manually open PDF: `Ctrl + Alt + V`
+- Check for PDF reader conflicts (close external PDF readers)
+- Check Output panel for errors: `Ctrl + Shift + U`
+
+### Issue: Bibliography not appearing
+
+**Symptom:** Citations show as `[?]` in PDF
+
+**Solutions:**
+
+- Run complete build sequence (4 passes)
+- Check `.bib` file is in correct location
+- Verify `\bibliography{}` command includes correct filename
+- Check for BibTeX errors in Output panel
+- Try manual build: `pdflatex → bibtex → pdflatex → pdflatex`
+
+### Issue: SyncTeX not working
+
+**Symptom:** Can't jump between PDF and source
+
+**Solutions:**
+
+- Ensure building with `-synctex=1` flag
+- Check for `.synctex.gz` file in output directory
+- Verify `latex-workshop.synctex.afterBuild.enabled` is `true`
+- Rebuild document
+- Close and reopen PDF
+
+### Issue: Slow performance
+
+**Symptom:** Editor lags or builds take too long
+
+**Solutions:**
+
+- Disable auto-build: set `latex-workshop.latex.autoBuild.run` to "never"
+- Increase auto-save delay
+- Use `\includeonly{}` for large documents
+- Clean auxiliary files: `Ctrl + Alt + C`
+- Split large documents into separate files with `\input{}` or `\include{}`
+
+---
+
+## Learning Path
+
+Don't try to memorize everything at once. Here's a recommended learning progression:
+
+### Week 1: Master the Basics
+
+- `Ctrl + Alt + B` (build)
+- `Ctrl + Shift + O` (navigate sections)
+- `Ctrl + F` / `Ctrl + H` (find/replace)
+- `Ctrl + Click` (jump to definitions)
+
+### Week 2: Editing Efficiency
+
+- `Ctrl + D` (select next occurrence)
+- `Alt + ↑/↓` (move lines)
+- `Ctrl + /` (comments)
+- Multi-cursor basics with `Alt + Click`
+
+### Week 3: Advanced Navigation
+
+- Code folding: `Ctrl + Shift + [`
+- `Alt + ←/→` (navigate history)
+- `F12` (go to definition)
+- Split editor: `Ctrl + \`
+
+### Week 4: Power User Features
+
+- Regex in find/replace
+- Advanced multi-cursor editing
+- Custom snippets
+- Git integration
+
+---
+
+## Additional Resources
+
+**Official Documentation:**
+
+- [LaTeX Workshop Wiki](https://github.com/James-Yu/LaTeX-Workshop/wiki)
+- [VS Code Documentation](https://code.visualstudio.com/docs)
+
+**Video Tutorials:**
+
+- Search YouTube for "VS Code LaTeX Workshop tutorial"
+- James Yu's LaTeX Workshop channel
+
+**Community Help:**
+
+- [LaTeX Stack Exchange](https://tex.stackexchange.com/)
+- [VS Code LaTeX Workshop Issues](https://github.com/James-Yu/LaTeX-Workshop/issues)
+
+**Downloadable Resources:**
+
+- [VS Code Keyboard Shortcuts PDF](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) (Windows)
+- [VS Code Keyboard Shortcuts PDF](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf) (Mac)
+- [VS Code Keyboard Shortcuts PDF](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf) (Linux)
+
+---
+
+## Conclusion
+
+Mastering these shortcuts transforms VS Code into a powerful LaTeX IDE that rivals or exceeds commercial alternatives. The key is gradual adoption—start with the basics, then progressively incorporate more advanced features into your workflow.
+
+The time investment pays off quickly. Most users report saving 30-50% of their document editing time once they've internalized these shortcuts. For a PhD student writing a dissertation, this could mean weeks of saved time.
+
+Remember: the goal isn't to memorize every shortcut, but to identify the ones that address your specific pain points. Start with what frustrates you most (maybe it's navigating between sections, or managing citations), master those shortcuts, then expand from there.
+
+> **Your turn:** Which of these shortcuts do you find most useful? What's your most-used VS Code feature for LaTeX? Share your experience in the comments below!
+
+Happy writing! 📝
+
+---
+
+_Last updated: December 17, 2025_
