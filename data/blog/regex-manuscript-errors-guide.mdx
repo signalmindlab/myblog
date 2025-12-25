@@ -1,0 +1,948 @@
+---
+title: 'Regex-Based Manuscript Error Detection: A Comprehensive Checklist for Academic Writing'
+date: '2025-12-25'
+tags: ['regex', 'manuscript-editing', 'academic-writing', 'latex', 'quality-control']
+draft: false
+summary: 'Master manuscript error detection using regular expressions. Learn powerful regex patterns to catch repeated words, punctuation errors, spacing issues, and formatting inconsistencies before journal submission.'
+authors: ['default']
+---
+
+## Why Use Regex for Manuscript Editing?
+
+Manual proofreading is essential but time-consuming and error-prone. Regular expressions (regex) offer a powerful complementary approach to catch systematic errors that human eyes often miss—double spaces, repeated words, inconsistent formatting, and punctuation mistakes.
+
+This comprehensive guide provides regex patterns for detecting common manuscript errors, organized by category. Each pattern includes examples and usage notes to help you implement automated quality checks in your writing workflow.
+
+**Tools you can use:** VS Code, Sublime Text, Notepad++, Python scripts, or command-line tools like `grep` and `sed`.
+
+---
+
+## Repetition Issues
+
+Repeated words are among the most common manuscript errors, often introduced during editing and revision.
+
+| Pattern                | Detects                           | Example Matches           |
+| ---------------------- | --------------------------------- | ------------------------- |
+| `\b(\w+)\s+\1\b`       | Repeated words (case-sensitive)   | "the the", "and and"      |
+| `(?i)\b(\w+)\s+\1\b`   | Repeated words (case-insensitive) | "The the", "AND and"      |
+| `\b(\w+\s+\w+)\s+\1\b` | Repeated phrases (2 words)        | "in order to in order to" |
+| `([.,;:!?])\1+`        | Double punctuation                | "..", ",,", ";;"          |
+
+### Usage Example
+
+In VS Code, open Find (`Ctrl + F`), enable regex mode (`Alt + R`), and search for `\b(\w+)\s+\1\b` to highlight all repeated words.
+
+**False positives to watch for:** Scientific terms like "chi-chi square" or proper names like "New New York" (fictional location).
+
+**Pro tip:** Use case-insensitive search for the first pass, then case-sensitive to catch subtle errors like "The the."
+
+---
+
+## Spacing Issues
+
+Spacing errors are invisible to casual reading but look unprofessional and can cause LaTeX compilation issues.
+
+| Pattern                | Detects                              | Example Matches          |
+| ---------------------- | ------------------------------------ | ------------------------ |
+| `\s{2,}`               | Multiple consecutive spaces          | "word text"              |
+| `\s+([.,;:!?)])`       | Space before punctuation             | "word .", "text ,"       |
+| `([.,;:!?])([A-Za-z])` | Missing space after punctuation      | "word.Next", "text,then" |
+| `\s+([)\]}])`          | Space before closing bracket         | "text )", "word ]"       |
+| `([\[({])([\w])`       | Missing space after opening bracket  | "(text", "[word"         |
+| `\t`                   | Tab characters (replace with spaces) | `\t\t`                   |
+| `\s+$`                 | Trailing spaces (end of line)        | "text \n"                |
+| `^\s+`                 | Leading spaces (start of line)       | " text"                  |
+
+### Common Workflow
+
+**Problem:** Your manuscript has inconsistent spacing from multiple editing rounds.
+
+**Solution:**
+
+1. Press `Ctrl + H` (Find and Replace)
+2. Enable regex: `Alt + R`
+3. Find: `\s{2,}`
+4. Replace: ` ` (single space)
+5. Review matches and replace all
+
+**For LaTeX users:** Be careful with intentional double spaces after periods in older styles, though modern practice recommends single spaces.
+
+---
+
+## Punctuation Errors
+
+Systematic punctuation errors are easily caught with regex patterns.
+
+| Pattern           | Detects                               | Example Matches |
+| ----------------- | ------------------------------------- | --------------- |
+| `\.{2,}`          | Multiple periods (except ellipsis)    | "..", "..."     |
+| `,\.`             | Comma before period                   | ",."            |
+| `\s+,`            | Space before comma                    | "word ,"        |
+| `,([A-Za-z0-9])`  | Missing space after comma             | ",the", ",5"    |
+| `--`              | Double hyphens (replace with em-dash) | "text--more"    |
+| `(\w)\s+-\s+(\w)` | Spaces around hyphens in compounds    | "well - known"  |
+| `\s+"`            | Space before closing quote            | 'text "'        |
+| `"\s+`            | Space after opening quote             | '" text'        |
+
+### Ellipsis Standardization
+
+**Find:** `\.\.\.`  
+**Replace:** `…` (single Unicode ellipsis character)
+
+Or for three-dot style:  
+**Replace:** `. . .` (spaces between dots)
+
+**Journal style check:** Some journals prefer `\ldots` in LaTeX. Check your target journal's author guidelines.
+
+---
+
+## Quotation Mark Issues
+
+Convert straight quotes to smart (curly) quotes or standardize quotation styles.
+
+| Pattern     | Detects/Converts           | Example   |
+| ----------- | -------------------------- | --------- |
+| `"([^"]+)"` | Straight double quotes     | "text"    |
+| `'([^']+)'` | Straight single quotes     | 'text'    |
+| `\s+"`      | Space before closing quote | '" text ' |
+| `"\s+`      | Space after opening quote  | '" text'  |
+
+### Smart Quote Conversion
+
+**For double quotes:**  
+Find: `"([^"]+)"`  
+Replace: `"$1"` or `"$1"` (depending on style)
+
+**Note:** Many journals require straight quotes in manuscripts. Check guidelines before converting.
+
+---
+
+## Number and Unit Formatting
+
+Scientific manuscripts require consistent number and unit formatting.
+
+| Pattern                  | Detects                               | Example Matches               |
+| ------------------------ | ------------------------------------- | ----------------------------- |
+| `(\d+)([a-zA-Z]{1,3})\b` | Missing space between number and unit | "5mm", "10kg", "100ms"        |
+| `(\d+)\s+%`              | Space before percentage               | "50 %", "75 %"                |
+| `(\d+),(\d{3})`          | Comma thousands separator             | "1,000", "5,000"              |
+| `(\d+)\.(\d{3})`         | Period thousands separator            | "1.000", "5.000"              |
+| `(\d+)\s*degrees?\s*C\b` | Degree notation                       | "25 degrees C", "30 degree C" |
+
+### Temperature Formatting
+
+**Find:** `(\d+)\s*degrees?\s*C\b`  
+**Replace:** `$1°C`
+
+**Result:** "25 degrees C" → "25°C"
+
+**LaTeX equivalent:** Use `\SI{25}{\celsius}` with siunitx package for best practice.
+
+### Unit Spacing
+
+**Find:** `(\d+)(mm|cm|m|km|mg|g|kg|mL|L|ms|s|min|h)\b`  
+**Replace:** `$1 $2`
+
+**Example:** "5mm" → "5 mm"
+
+**Important:** Review matches carefully—some contexts might use different conventions (e.g., "5mm" in figure dimensions).
+
+---
+
+## Common Word Errors
+
+Catch frequently confused words and articles.
+
+| Pattern              | Detects                    | Common Issue          |
+| -------------------- | -------------------------- | --------------------- |
+| `\bit's\b`           | Possessive "it's"          | Should often be "its" |
+| `\bits'\b`           | Incorrect possessive       | "its" not "its'"      |
+| `\ba\s+a\b`          | Double article "a"         | "a a study"           |
+| `\bthe\s+the\b`      | Double article "the"       | "the the results"     |
+| `\ba\s+[aeiouAEIOU]` | Wrong article before vowel | "a apple", "a error"  |
+
+### Context-Dependent Checking
+
+**Pattern:** `\bit's\b`
+
+This finds all instances of "it's" (contraction for "it is"), which in scientific writing should often be "its" (possessive).
+
+**How to verify:**
+
+1. Find all instances with regex
+2. Manually check each one
+3. Replace where "it is" doesn't make sense
+
+**Example:**  
+"The model and it's parameters" → "The model and its parameters"  
+"It's important to note" → Keep as is (means "It is")
+
+---
+
+## Mathematical and LaTeX Formatting
+
+Special patterns for LaTeX manuscripts.
+
+| Pattern                 | Detects                           | Example           |
+| ----------------------- | --------------------------------- | ----------------- |
+| `\$([A-Za-z])\$`        | Single letter in math mode        | `$x$`, `$y$`      |
+| `\b[A-Za-z]_\{?\d+\}?`  | Subscripts outside math mode      | `x_1`, `a_{12}`   |
+| `\b[A-Za-z]\^\{?\d+\}?` | Superscripts outside math mode    | `x^2`, `a^{12}`   |
+| `\\section\{([^}]+)\}`  | Section commands (for conversion) | `\section{Title}` |
+| `%\s+`                  | Comments with extra space         | `% comment`       |
+
+### Convert Sections to Unnumbered
+
+**Find:** `\\section\{([^}]+)\}`  
+**Replace:** `\\section*{$1}`
+
+**Result:** All sections become unnumbered.
+
+**Use case:** Converting to appendix format or supplementary materials.
+
+### Find Math Mode Issues
+
+**Pattern:** `(?<!\\)\$[^$]*[^$\\]\$(?!\$)`
+
+This finds potential math mode errors where special characters might need escaping.
+
+---
+
+## Reference and Citation Formatting
+
+Ensure proper citation formatting throughout your manuscript.
+
+| Pattern                 | Detects                      | Example                 |
+| ----------------------- | ---------------------------- | ----------------------- |
+| `\[\d+\]([A-Za-z])`     | Missing space after citation | "[1]The", "[23]However" |
+| `\s+\[\d+\]`            | Extra space before citation  | "text [1]"              |
+| `\[(\d+)\]\s*\[(\d+)\]` | Consecutive citations        | "[1] [2]", "[5] [6]"    |
+| `doi:\s+`               | Extra space after DOI        | "doi: 10.1234"          |
+| `DOI:`                  | Uppercase DOI                | "DOI:10.1234"           |
+
+### Standardize DOI Format
+
+**Find:** `DOI:\s*`  
+**Replace:** `doi:`
+
+**Or for modern format:**  
+**Find:** `doi:\s*(\S+)`  
+**Replace:** `https://doi.org/$1`
+
+**Example:** "doi:10.1234/example" → "https://doi.org/10.1234/example"
+
+### Collapse Consecutive Citations
+
+**Find:** `\[(\d+)\]\s*\[(\d+)\]`  
+**Replace:** `[$1,$2]` or `[$1-$2]` (depending on style)
+
+**Before:** "[1] [2] [3]"  
+**After:** "[1-3]" or "[1,2,3]"
+
+---
+
+## Figure and Table References
+
+Maintain consistency in figure and table references.
+
+| Pattern                                      | Detects                             | Example                 |
+| -------------------------------------------- | ----------------------------------- | ----------------------- |
+| `\bfigure\s+\d+`                             | Lowercase "figure"                  | "figure 1", "figure 12" |
+| `\btable\s+\d+`                              | Lowercase "table"                   | "table 2", "table 5"    |
+| `(Figure\|Table\|Section\|Equation)\s+\\ref` | Missing non-breaking space in LaTeX | `Figure \ref{fig:1}`    |
+
+### Capitalize References
+
+**Find:** `\bfigure\s+(\d+)`  
+**Replace:** `Figure $1`
+
+**Find:** `\btable\s+(\d+)`  
+**Replace:** `Table $1`
+
+### Add Non-Breaking Space in LaTeX
+
+**Find:** `(Figure|Table|Section|Equation)\s+\\ref`  
+**Replace:** `$1~\\ref`
+
+**Result:** Prevents line breaks between "Figure" and its number.
+
+---
+
+## Line Break and Special Character Issues
+
+Platform-specific and special character problems.
+
+| Pattern             | Detects                             | Example        |
+| ------------------- | ----------------------------------- | -------------- |
+| `\n{3,}`            | More than 2 consecutive line breaks | `\n\n\n\n`     |
+| `\r\n`              | Windows line endings                | `text\r\n`     |
+| `\r(?!\n)`          | Carriage return only                | Old Mac format |
+| `(\d+)\s*x\s*(\d+)` | Letter x as multiplication          | "5 x 3"        |
+| `(\d+)'`            | Apostrophe for feet/arcminutes      | "5'", "12'"    |
+
+### Standardize Line Endings
+
+**Convert Windows to Unix:**  
+Find: `\r\n`  
+Replace: `\n`
+
+**Remove excessive line breaks:**  
+Find: `\n{3,}`  
+Replace: `\n\n`
+
+### Fix Multiplication Signs
+
+**Find:** `(\d+)\s*x\s*(\d+)`  
+**Replace:** `$1 × $2`
+
+**Result:** "5 x 3" → "5 × 3"
+
+**LaTeX alternative:** Use `$5 \times 3$` for proper mathematical notation.
+
+---
+
+## Parentheses and Bracket Errors
+
+Check for matching and spacing issues.
+
+| Pattern   | Detects                    | Example  |
+| --------- | -------------------------- | -------- |
+| `\(\s*\)` | Empty parentheses          | `( )`    |
+| `\(\(`    | Double opening parentheses | `((text` |
+| `\)\)`    | Double closing parentheses | `text))` |
+| `\[\[`    | Double opening brackets    | `[[text` |
+| `\]\]`    | Double closing brackets    | `text]]` |
+
+### Advanced: Find Unmatched Brackets
+
+This is complex in pure regex, but a simple check:
+
+**Find:** `\([^\)]*\[` (opening bracket inside parentheses without closing)
+
+**Better approach:** Use your editor's bracket matching feature or a dedicated tool like `grep -P` with recursive patterns.
+
+---
+
+## URL and Email Formatting
+
+Ensure proper URL and email formatting.
+
+| Pattern                          | Detects                   | Issue                      |
+| -------------------------------- | ------------------------- | -------------------------- |
+| `(https?://\S+)\s+(\S+)`         | Broken URLs with spaces   | "http://example .com/page" |
+| `\b[\w._%+-]+@[\w.-]+\.\w{2,}\b` | Email addresses           | Find all emails            |
+| `(https?://[^\s]+)-\s+([^\s]+)`  | URLs broken at line break | URL split across lines     |
+
+### Find All URLs
+
+**Pattern:** `https?://[^\s]+`
+
+**Use case:** Verify all URLs are accessible before submission.
+
+**Pro tip:** Export matches to a list, then use a script to check if each URL returns HTTP 200.
+
+---
+
+## Abbreviation Formatting
+
+Standardize abbreviation styles.
+
+| Pattern                              | Detects/Fixes                  | Example            |
+| ------------------------------------ | ------------------------------ | ------------------ |
+| `\b(Dr\|Mr\|Mrs\|Ms\|Prof)(?!\.)`    | Missing period after title     | "Dr Smith"         |
+| `\b(Fig\|Tab\|vs\|etc\|et al)(?!\.)` | Missing period in abbreviation | "Fig 1", "et al"   |
+| `\bi\.e\.\s`                         | i.e. without comma             | "i.e. furthermore" |
+| `\be\.g\.\s`                         | e.g. without comma             | "e.g. studies"     |
+| `et al\.([A-Za-z])`                  | Missing space after "et al."   | "et al.Smith"      |
+
+### Standardize Latin Abbreviations
+
+**Find:** `\bi\.e\.(?!,)`  
+**Replace:** `i.e.,`
+
+**Find:** `\be\.g\.(?!,)`  
+**Replace:** `e.g.,`
+
+**Result:** Ensures comma follows these abbreviations per Chicago Manual of Style.
+
+**Note:** Some journals prefer "i.e." without comma—check your target journal's style guide.
+
+---
+
+## Implementing Regex Checks
+
+### Method 1: VS Code Bulk Find
+
+1. Open Command Palette: `Ctrl + Shift + P`
+2. Type "Find in Files"
+3. Enable regex: Click `.*` icon or press `Alt + R`
+4. Paste pattern in search box
+5. Review all matches across your project
+6. Use Replace in Files for batch corrections
+
+### Method 2: Python Script
+
+```python
+import re
+
+def check_manuscript(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Check for repeated words
+    repeated = re.findall(r'\b(\w+)\s+\1\b', content, re.IGNORECASE)
+    if repeated:
+        print(f"Found repeated words: {set(repeated)}")
+
+    # Check for double spaces
+    double_spaces = len(re.findall(r'\s{2,}', content))
+    if double_spaces:
+        print(f"Found {double_spaces} instances of multiple spaces")
+
+    # Add more checks as needed
+
+# Usage
+check_manuscript('manuscript.tex')
+```
+
+### Method 3: Command Line (Linux/Mac)
+
+```bash
+# Find repeated words
+grep -n -E '\b(\w+)\s+\1\b' manuscript.tex
+
+# Find double spaces
+grep -n -E '\s{2,}' manuscript.tex
+
+# Count occurrences
+grep -c -E 'pattern' manuscript.tex
+```
+
+### Method 4: Automated Pre-Submission Check
+
+Create a shell script `check-manuscript.sh`:
+
+```bash
+#!/bin/bash
+
+FILE=$1
+ERRORS=0
+
+echo "Checking manuscript: $FILE"
+echo "================================"
+
+# Check for repeated words
+if grep -E '\b(\w+)\s+\1\b' "$FILE" > /dev/null; then
+    echo "❌ Found repeated words"
+    grep -n -E '\b(\w+)\s+\1\b' "$FILE"
+    ERRORS=$((ERRORS + 1))
+else
+    echo "✓ No repeated words"
+fi
+
+# Check for double spaces
+if grep -E '\s{2,}' "$FILE" > /dev/null; then
+    echo "❌ Found double spaces"
+    ERRORS=$((ERRORS + 1))
+else
+    echo "✓ No double spaces"
+fi
+
+# Check for space before punctuation
+if grep -E '\s+[.,;:!?]' "$FILE" > /dev/null; then
+    echo "❌ Found space before punctuation"
+    ERRORS=$((ERRORS + 1))
+else
+    echo "✓ No space before punctuation"
+fi
+
+echo "================================"
+echo "Total error categories: $ERRORS"
+
+if [ $ERRORS -eq 0 ]; then
+    echo "✓ All checks passed!"
+    exit 0
+else
+    echo "❌ Please review and fix errors"
+    exit 1
+fi
+```
+
+**Usage:**
+
+```bash
+chmod +x check-manuscript.sh
+./check-manuscript.sh manuscript.tex
+```
+
+---
+
+## Complete Checklist
+
+Here's a prioritized checklist for manuscript review:
+
+### High Priority (Always Check)
+
+- [ ] Repeated words: `\b(\w+)\s+\1\b`
+- [ ] Double spaces: `\s{2,}`
+- [ ] Space before punctuation: `\s+([.,;:!?)])`
+- [ ] Missing space after punctuation: `([.,;:!?])([A-Za-z])`
+- [ ] Trailing spaces: `\s+$`
+- [ ] Lowercase figure/table references: `\bfigure\s+\d+`, `\btable\s+\d+`
+
+### Medium Priority (Common Errors)
+
+- [ ] Missing space after comma: `,([A-Za-z0-9])`
+- [ ] Number-unit spacing: `(\d+)([a-zA-Z]{1,3})\b`
+- [ ] Double punctuation: `([.,;:!?])\1+`
+- [ ] Incorrect "it's" usage: `\bit's\b`
+- [ ] Missing space after citation: `\[\d+\]([A-Za-z])`
+- [ ] DOI formatting: `DOI:\s*`, `doi:\s+`
+
+### Low Priority (Style and Consistency)
+
+- [ ] Multiple line breaks: `\n{3,}`
+- [ ] Tab characters: `\t`
+- [ ] Ellipsis standardization: `\.\.\.`
+- [ ] Em-dash formatting: `--`
+- [ ] Degree notation: `(\d+)\s*degrees?\s*C\b`
+- [ ] Latin abbreviations: `\bi\.e\.(?!,)`, `\be\.g\.(?!,)`
+
+### LaTeX-Specific
+
+- [ ] Missing tilde before ref: `(Figure|Table|Section)\s+\\ref`
+- [ ] Math mode issues: `\b[A-Za-z]_\{?\d+\}?`
+- [ ] Comment spacing: `%\s+`
+- [ ] Section formatting: `\\section\{([^}]+)\}`
+
+---
+
+## Best Practices
+
+### 1. Test on Sample Text First
+
+Before running replacements on your entire manuscript, test patterns on a small section or dummy file. Regex can make unexpected matches.
+
+### 2. Review Before Replace All
+
+Always click through matches before using "Replace All." Some matches might be intentional (e.g., "New New York" in fiction).
+
+### 3. Use Version Control
+
+Before bulk replacements:
+
+```bash
+git commit -m "Before regex cleanup"
+# Run your regex replacements
+git diff  # Review changes
+git commit -m "After regex cleanup"
+```
+
+This lets you revert if something goes wrong.
+
+### 4. Create a Personal Regex Library
+
+Save commonly used patterns in a text file for quick reference:
+
+```text
+# My Manuscript Regex Patterns
+Repeated words: \b(\w+)\s+\1\b
+Double spaces: \s{2,}
+Missing space after period: \.([A-Z])
+# ... etc
+```
+
+### 5. Combine with Manual Review
+
+Regex catches systematic errors but can't replace human judgment. Always:
+
+- Read your manuscript thoroughly
+- Use grammar checkers like Grammarly or LanguageTool
+- Have colleagues review your work
+- Check against journal style guides
+
+### 6. Be Journal-Aware
+
+Different journals have different requirements:
+
+- American vs. British spelling
+- Serial comma preferences
+- Citation format (numbered vs. author-year)
+- Figure/table caption placement
+
+Adapt your regex checks accordingly.
+
+---
+
+## Common Pitfalls
+
+### Pitfall 1: Over-Eager Matching
+
+**Problem:** `\ba\s+[aeiou]` matches "a united" (where "a" is correct because "united" starts with "yoo" sound)
+
+**Solution:** Review matches manually; not all vowels start with vowel sounds.
+
+### Pitfall 2: Breaking LaTeX Commands
+
+**Problem:** Replacing `--` with `—` breaks `\texttt{--flag}` or `\verb|--|`
+
+**Solution:** Use negative lookbehind: `(?<!\\texttt\{)--(?!\})`
+
+**Or:** Manually review all replacements in code blocks.
+
+### Pitfall 3: False Positives in References
+
+**Problem:** Finding "repeated words" in bibliography entries like "Smith, J. J."
+
+**Solution:** Exclude bibliography section from checks, or use more specific patterns.
+
+### Pitfall 4: Different Encodings
+
+**Problem:** Regex works in VS Code but fails in terminal
+
+**Solution:** Ensure UTF-8 encoding everywhere:
+
+```bash
+file -bi manuscript.tex  # Check encoding
+iconv -f ISO-8859-1 -t UTF-8 manuscript.tex > manuscript_utf8.tex
+```
+
+---
+
+## Advanced Regex Techniques
+
+### Lookaheads and Lookbehinds
+
+**Positive Lookahead:** Match pattern only if followed by something
+
+```regex
+\b(Figure)(?=\s+\d+)  # Match "Figure" only before a number
+```
+
+**Negative Lookahead:** Match pattern only if NOT followed by something
+
+```regex
+\be\.g\.(?!,)  # Match "e.g." only if not followed by comma
+```
+
+**Positive Lookbehind:** Match pattern only if preceded by something
+
+```regex
+(?<=\d)\s+(?=mm)  # Match space between number and "mm"
+```
+
+**Negative Lookbehind:** Match pattern only if NOT preceded by something
+
+```regex
+(?<!\\)\$  # Match $ only if not preceded by backslash (LaTeX)
+```
+
+### Non-Capturing Groups
+
+Use `(?:...)` when you need grouping but don't want to capture:
+
+```regex
+(?:Dr|Mr|Mrs|Ms)\.?\s+([A-Z][a-z]+)
+# Matches title + name, captures only the name
+```
+
+### Named Capture Groups
+
+For readability in complex patterns:
+
+```regex
+\b(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})\b
+# Captures date components with meaningful names
+```
+
+### Multiline Mode
+
+Enable with flag `m` or `(?m)`:
+
+```regex
+(?m)^\s+  # Matches leading spaces at start of each line
+```
+
+---
+
+## Troubleshooting
+
+### Issue: Pattern Works Online but Not in My Editor
+
+**Cause:** Different regex flavors (PCRE, ECMAScript, Python, etc.)
+
+**Solution:**
+
+- VS Code uses JavaScript regex (ECMAScript)
+- Python uses its own flavor
+- Check your tool's regex documentation
+
+**Example:** `\K` (keep) works in PCRE but not JavaScript
+
+### Issue: Too Many False Positives
+
+**Cause:** Pattern is too general
+
+**Solution:** Add context with lookarounds
+
+```regex
+# Too general
+\bthe\s+the\b
+
+# More specific (not in comments)
+(?<!%).*\bthe\s+the\b
+```
+
+### Issue: Pattern Doesn't Match Across Lines
+
+**Cause:** `.` doesn't match newlines by default
+
+**Solution:** Use `[\s\S]` or enable DOTALL mode
+
+```regex
+# Match paragraph with specific text
+(?s)\\begin\{abstract\}.*?specific.*?\\end\{abstract\}
+```
+
+### Issue: Replacement Breaks Formatting
+
+**Cause:** Captured groups not preserved correctly
+
+**Solution:** Use numbered backreferences (`$1`, `$2`) or named ones
+
+```regex
+# Find
+(\d+)\s+(mm|cm|m)
+
+# Replace
+$1 $2  # Preserves both captures
+```
+
+---
+
+## Integration with Writing Workflow
+
+### Stage 1: During Writing
+
+**Light checks only** to avoid interrupting flow:
+
+- Double spaces (as you type)
+- Obvious typos
+
+**Tool:** Enable "show invisibles" in your editor to see extra spaces.
+
+### Stage 2: Section Complete
+
+After finishing a section, run:
+
+- Repeated words check
+- Punctuation spacing
+- Reference formatting
+
+**Frequency:** After each major section or daily writing session.
+
+### Stage 3: Full Draft Complete
+
+Comprehensive check before sharing with co-authors:
+
+- All high-priority patterns
+- Medium-priority patterns
+- Style consistency checks
+
+**Tool:** Run automated script or manual search through all patterns.
+
+### Stage 4: Pre-Submission
+
+Final polish before journal submission:
+
+- All checklist items
+- Journal-specific formatting
+- Reference and citation verification
+- Figure/table reference consistency
+
+**Best practice:** Create a submission checklist document tracking all checks.
+
+---
+
+## Real-World Example Workflow
+
+### Scenario: 30-Page Research Paper, Pre-Submission
+
+**Step 1: Setup (5 minutes)**
+
+```bash
+# Create working copy
+cp manuscript.tex manuscript_before_cleanup.tex
+
+# Initialize git if not already
+git init
+git add .
+git commit -m "Before regex cleanup"
+```
+
+**Step 2: High-Priority Checks (15 minutes)**
+
+In VS Code:
+
+1. Find repeated words: `\b(\w+)\s+\1\b`
+   - Review: 8 instances found
+   - Fixed: 6 were errors, 2 were intentional ("Cha-Cha" dancing, "Wagga Wagga" place name)
+
+2. Find double spaces: `\s{2,}`
+   - Found: 47 instances
+   - Replace all with single space
+
+3. Fix capitalization: `\bfigure\s+(\d+)` → `Figure $1`
+   - Found: 23 instances
+   - Replace all
+
+**Step 3: Medium-Priority Checks (10 minutes)**
+
+4. Number-unit spacing: `(\d+)(mm|cm|m|kg|g|mg)\b` → `$1 $2`
+   - Found: 15 instances
+   - Manually reviewed each (some were in figure filenames—excluded those)
+   - Replaced: 12 instances
+
+5. Citation spacing: `\[\d+\]([A-Za-z])` → `[$1] $2`
+   - Found: 5 instances
+   - Replace all
+
+**Step 4: LaTeX-Specific (10 minutes)**
+
+6. Non-breaking spaces: `(Figure|Table)\s+\\ref` → `$1~\\ref`
+   - Found: 31 instances
+   - Replace all
+
+7. Clean up comments: `%\s\s+` → `% `
+   - Found: 12 instances
+   - Replace all
+
+**Step 5: Verification (5 minutes)**
+
+```bash
+# Compile to check for errors
+pdflatex manuscript.tex
+
+# Check git diff
+git diff manuscript.tex
+
+# Commit changes
+git add manuscript.tex
+git commit -m "Regex cleanup: spacing, punctuation, references"
+```
+
+**Total time:** 45 minutes  
+**Issues found:** 145+ formatting errors  
+**Errors prevented:** Potentially embarrassing submission issues
+
+---
+
+## Additional Resources
+
+**Regex Testing Tools:**
+
+- [Regex101](https://regex101.com/) - Interactive regex tester with explanation
+- [RegExr](https://regexr.com/) - Visual regex learning tool
+- [RegexBuddy](https://www.regexbuddy.com/) - Desktop regex development tool
+
+**Learning Resources:**
+
+- [Regular-Expressions.info](https://www.regular-expressions.info/) - Comprehensive tutorial
+- [RegexOne](https://regexone.com/) - Interactive lessons
+- [Mastering Regular Expressions](https://www.oreilly.com/library/view/mastering-regular-expressions/0596528124/) - O'Reilly book
+
+**LaTeX-Specific:**
+
+- [LaTeX Stack Exchange](https://tex.stackexchange.com/) - Q&A for LaTeX issues
+- [Overleaf Guides](https://www.overleaf.com/learn) - LaTeX tutorials and best practices
+
+**Editor Documentation:**
+
+- [VS Code Regex](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options)
+- [Sublime Text Regex](https://www.sublimetext.com/docs/search.html)
+- [Python re Module](https://docs.python.org/3/library/re.html)
+
+---
+
+## Downloadable Resources
+
+Create these helper files for your workflow:
+
+### 1. Quick Reference Card
+
+Save as `regex-manuscript-checks.txt`:
+
+```text
+=== MANUSCRIPT REGEX QUICK REFERENCE ===
+
+HIGH PRIORITY:
+Repeated words:           \b(\w+)\s+\1\b
+Double spaces:            \s{2,}
+Space before punct:       \s+([.,;:!?)])
+Missing space after:      ([.,;:!?])([A-Za-z])
+Trailing spaces:          \s+$
+
+CITATIONS:
+Missing space after:      \[\d+\]([A-Za-z])
+DOI formatting:           DOI:\s*
+                         doi:\s+
+
+FIGURES/TABLES:
+Lowercase references:     \bfigure\s+\d+
+                         \btable\s+\d+
+
+LATEX:
+Missing tilde:           (Figure|Table)\s+\\ref
+Math outside mode:       \b[A-Za-z]_\{?\d+\}?
+
+=== END REFERENCE ===
+```
+
+### 2. VS Code Snippets
+
+Add to your VS Code settings:
+
+```json
+{
+  "Regex Checks": {
+    "prefix": "regex-check",
+    "body": [
+      "// Repeated words: \\b(\\w+)\\s+\\1\\b",
+      "// Double spaces: \\s{2,}",
+      "// Space before punctuation: \\s+([.,;:!?)])",
+      "// Missing space after punctuation: ([.,;:!?])([A-Za-z])"
+    ],
+    "description": "Common regex patterns for manuscript checking"
+  }
+}
+```
+
+---
+
+## Conclusion
+
+Regular expressions transform manuscript editing from tedious manual proofreading into systematic quality control. While regex can't replace human judgment, it excels at catching repetitive, systematic errors that are easy to miss but embarrassing in publication.
+
+The key is building a personal library of patterns tailored to your writing style and common errors. Start with high-priority checks (repeated words, spacing issues), then gradually expand your toolkit as you identify additional patterns in your work.
+
+**Remember:**
+
+1. Always test patterns on sample text first
+2. Review matches before bulk replacements
+3. Use version control to enable safe experimentation
+4. Combine regex with traditional proofreading
+5. Adapt patterns to journal-specific requirements
+
+**Investment vs. Return:** Setting up regex checks takes 1-2 hours initially but saves hours on every subsequent manuscript. For researchers submitting multiple papers yearly, this efficiency gain compounds significantly.
+
+> **Share your patterns:** What manuscript errors do you catch most often? What regex patterns have you found most useful? Share your experiences in the comments!
+
+Happy writing and error-free submissions! 🔍📝
+
+---
+
+_Last updated: December 25, 2025_
+
+**About the Author:** This guide is maintained by researchers who've collectively reviewed thousands of manuscripts and developed automated quality checks to streamline the submission process.
+
+**Feedback Welcome:** Found an error or have a pattern to suggest? Please contribute via comments or GitHub issues.
