@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"H:\\\\Websites\\\\myblog\\\\.github\\\\workflows\"\" 2>/dev/null || echo \"No workflows found \")",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Cloudflare Pages configuration and setup guide\n\n- Add wrangler.toml for Cloudflare Pages configuration\n- Add CLOUDFLARE_PAGES_SETUP.md with deployment instructions\n- Configure build output to .next directory\n- Remove dependency on wrangler deploy command\n\nThis fixes the failed deployments by properly configuring\nCloudflare Pages for a static Next.js site.\n\nCo-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(yarn build)",
+      "Bash(yarn install:*)",
+      "Bash(tee:*)",
+      "Bash(cross-env EXPORT=1 UNOPTIMIZED=1 yarn build:*)",
+      "Bash(EXPORT=1 UNOPTIMIZED=1 yarn build:*)"
+    ]
+  }
+}
