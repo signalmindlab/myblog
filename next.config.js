@@ -15,7 +15,7 @@ const ContentSecurityPolicy = `
   font-src 'self';
   frame-src giscus.app
 `
-
+ 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
   {
