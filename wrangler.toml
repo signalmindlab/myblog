@@ -1,0 +1,15 @@
+# Cloudflare Pages configuration for Next.js
+# This file is optional - Cloudflare Pages can work without it
+# But it helps ensure proper configuration
+
+name = "tailwind-nextjs-blog"
+type = "javascript"
+compatibility_date = "2026-02-11"
+
+# Build settings for Cloudflare Pages
+[build]
+command = "yarn build"
+
+# The .next directory contains Next.js build output
+# Cloudflare Pages will serve static files from here
+assets = ".next"
